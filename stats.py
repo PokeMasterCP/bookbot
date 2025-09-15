@@ -4,7 +4,7 @@ def get_num_words(content: str) -> int:
     return len(words)
 
 def get_num_characters(content: str) -> dict:
-    """Return the number of times a each character appears in a string."""
+    """Return a dictionary of each character that appears in a string."""
     word_list = content.split()
     character_counts = {}
 
@@ -19,8 +19,12 @@ def get_num_characters(content: str) -> dict:
 
 def __sort_on(items: dict) -> int:
     """Return value of item in dict to use in sorting."""
-    return items["count"]
+    return items["num"]
 
-def sort_dict(items: dict) -> dict:
-    """Return a sorted dictionary"""
-    pass
+def get_sorted_list(items: dict) -> list:
+    """Return a sorted dictionary in a list"""
+    sorted_list = []
+    for key in items:
+        sorted_list.append({"char": key, "num": items[key]})
+    sorted_list.sort(reverse=True, key=__sort_on)
+    return sorted_list
