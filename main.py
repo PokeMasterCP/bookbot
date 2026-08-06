@@ -28,8 +28,13 @@ def main():
         print("Usage: python3 main.py <path_to_book>")
         sys.exit(1)
     
-    file = sys.argv[1] 
-    book_text = get_book_text(file)
+    file = sys.argv[1]
+    try:
+        book_text = get_book_text(file)
+    except OSError as e:
+        print(f"Could not read {file}: {e}")
+        sys.exit(1)
+
     word_count = get_num_words(book_text)
     unsorted_char_count = get_num_characters(book_text)
     sorted_char_count = get_sorted_list(unsorted_char_count)
@@ -37,4 +42,6 @@ def main():
     output = format_output(word_count, sorted_char_count, file)
     print(output)
 
-main()
+
+if __name__ == "__main__":
+    main()
